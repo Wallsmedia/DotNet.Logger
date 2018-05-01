@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>DotNet.NLogger.NetCore</AssemblyName>
+    <RootNamespace>DotNet.NLogger.NetCore</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Version>2.0.0</Version>
+    <FileVersion>2.0.0</FileVersion>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+
+    <PackageId>DotNet.NLog.NetCore</PackageId>
+    <Description>Dot Net NLog  logger wrapper for Microsoft.Extensions.Logging.</Description>
+    
+    <Authors>Wallsmedia Ltd</Authors>
+    <Copyright>Copyright © Artem Paskhin 2018. All rights reserved.</Copyright>
+    
+    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Wallsmedia/DotNet.Logger.git</RepositoryUrl>
+    
+    <OutputType>Library</OutputType>
+    <PackageTags>NLog  Log Logger</PackageTags>
+    <PackageReleaseNotes>Singed assembly; version for netstandard2.0</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Abstractions\**" />
+    <EmbeddedResource Remove="Abstractions\**" />
+    <None Remove="Abstractions\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.0.1" />
+    <PackageReference Include="NLog" Version="4.5.3" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(Configuration) == 'Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>../../.nupkgs</PackageOutputPath>
+  </PropertyGroup>
+
+</Project>
