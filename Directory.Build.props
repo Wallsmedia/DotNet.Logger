@@ -1,0 +1,7 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <Product>Dot NET Core "Microsoft.Extensions.Logging" Logger Extensions</Product>
+  </PropertyGroup>
+  
+</Project>
