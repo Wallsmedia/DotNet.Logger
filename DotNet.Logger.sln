@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet.NLogger.NetCore", "src\DotNet.NLogger.NetCore\DotNet.NLogger.NetCore.csproj", "{1DF081B1-08CB-4FD1-B8CE-4A48EB65E65B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{9B66AD7E-362F-428C-9B1D-A06B4DC396A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestWebApplication", "samples\RestWebApplication\RestWebApplication.csproj", "{B468AAF0-EA49-4D0A-B6D5-1D5999B17263}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,10 @@ Global
 		{1DF081B1-08CB-4FD1-B8CE-4A48EB65E65B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DF081B1-08CB-4FD1-B8CE-4A48EB65E65B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DF081B1-08CB-4FD1-B8CE-4A48EB65E65B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B468AAF0-EA49-4D0A-B6D5-1D5999B17263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B468AAF0-EA49-4D0A-B6D5-1D5999B17263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B468AAF0-EA49-4D0A-B6D5-1D5999B17263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B468AAF0-EA49-4D0A-B6D5-1D5999B17263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +57,7 @@ Global
 		{F0DB833F-B527-4376-9264-87BF9EB5CC51} = {58A40194-3598-484D-A9A3-7208C0C229B9}
 		{19546351-EECF-4E34-A543-08188E99458E} = {642E6A4A-C7A0-4A46-ACFD-185012F05077}
 		{1DF081B1-08CB-4FD1-B8CE-4A48EB65E65B} = {58A40194-3598-484D-A9A3-7208C0C229B9}
+		{B468AAF0-EA49-4D0A-B6D5-1D5999B17263} = {9B66AD7E-362F-428C-9B1D-A06B4DC396A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F98EE67-4E05-4208-9C73-209F7CF177D1}
