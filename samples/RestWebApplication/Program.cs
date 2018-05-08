@@ -18,7 +18,7 @@ using DotNet.Memory.NetCore;
 using DotNet.NLogger.NetCore;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
-//using Microsoft.AspNetCore.HostFiltering;
+using Microsoft.AspNetCore.HostFiltering;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,11 +51,10 @@ namespace RestWebApplication
 
             var builder = new WebHostBuilder()
              .UseKestrel(
-             /* ver 2.1.
              (builderContext, options) =>
-          {
-              options.Configure(builderContext.Configuration.GetSection("Kestrel"));
-          }*/
+                {
+                    options.Configure(builderContext.Configuration.GetSection("Kestrel"));
+                }
              )
              .UseContentRoot(Directory.GetCurrentDirectory())
              .ConfigureAppConfiguration((hostingContext, config) =>
@@ -120,7 +119,6 @@ namespace RestWebApplication
              })
              .ConfigureServices((hostingContext, services) =>
              {
-                 /* for ver 2.1
                  // Fallback 
                  services.PostConfigure<HostFilteringOptions>(options =>
                              {
@@ -139,7 +137,6 @@ namespace RestWebApplication
 
                  // Hosting filter to the startip
                  services.AddTransient<IStartupFilter, HostFilteringStartupFilter>();
-                 */
              })
              .UseIISIntegration()
              .UseDefaultServiceProvider((context, options) =>
@@ -156,18 +153,17 @@ namespace RestWebApplication
 
             return builder;
         }
-    }
-    /* ver 2.1
-    internal class HostFilteringStartupFilter : IStartupFilter
-    {
-        public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
+
+        internal class HostFilteringStartupFilter : IStartupFilter
         {
-            return app =>
+            public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
             {
-                app.UseHostFiltering();
-                next(app);
-            };
+                return app =>
+                {
+                    app.UseHostFiltering();
+                    next(app);
+                };
+            }
         }
     }
-    */
 }

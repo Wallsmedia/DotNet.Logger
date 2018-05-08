@@ -37,10 +37,10 @@ namespace RestWebApplication
             }
             else
             {
-                // app.UseHsts(); // ver 2.1
+                 app.UseHsts(); // ver 2.1
             }
 
-            //app.UseHttpsRedirection(); //ver 2.1
+            app.UseHttpsRedirection(); //ver 2.1
             app.UseMvc();
         }
     }
