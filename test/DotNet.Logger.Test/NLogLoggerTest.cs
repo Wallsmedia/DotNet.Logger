@@ -93,11 +93,24 @@ namespace DotNet.Memory.Logger.Test
         {
             NLogLoggerProvider prv = new NLogLoggerProvider();
 
-            Assert.AreEqual<string>("f*", prv.MatchToPattern("FaKeNamE", new string[] { "f*" }));
-            Assert.AreEqual<string>("*name", prv.MatchToPattern("FaKeNamE", new string[] { "*name" }));
-            Assert.AreEqual<string>("FAKENAME", prv.MatchToPattern("FaKeNamE", new string[] { "FAKENAME" }));
-            Assert.AreEqual<string>("", prv.MatchToPattern("", new string[] { "FAKENAME" }));
-            Assert.AreEqual<string>("", prv.MatchToPattern("FaKeNamE", new string[] { }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.StartWith, "f*"), prv.MatchToPatternList("FaKeNamE", new List<string>() { "f*" }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.EndWith, "*name"), prv.MatchToPatternList("FaKeNamE", new List<string>() { "*name" }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.Contains, "*ENA*"), prv.MatchToPatternList("FaKeNamE", new List<string>() { "*ENA*" }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.Exact, "FAKENAME"), prv.MatchToPatternList("FaKeNamE", new List<string>() { "FAKENAME" }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.WildMatch, "*"), prv.MatchToPatternList("werftg", new List<string>() { "*" }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.None, string.Empty), prv.MatchToPatternList("", new List<string>() { "FAKENAME" }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.None, string.Empty), prv.MatchToPatternList("", new List<string>() { "FAKENAME" }));
+            Assert.AreEqual<(MatchPatternResult, string)>((MatchPatternResult.None, string.Empty), prv.MatchToPatternList("FaKeNamE", new List<string>() { }));
+
+
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.StartWith, "f*", "Map"), prv.MatchToMappingPattern("FaKeNamE", new Dictionary<string, string>() { ["f*"] = "Map" }));
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.EndWith, "*name", "Map"), prv.MatchToMappingPattern("FaKeNamE", new Dictionary<string, string>() { ["*name"] = "Map" }));
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.Contains, "*ENA*", "Map"), prv.MatchToMappingPattern("FaKeNamE", new Dictionary<string, string>() { ["*ENA*"] = "Map" }));
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.Exact, "FAKENAME", "Map"), prv.MatchToMappingPattern("FaKeNamE", new Dictionary<string, string>() { ["FAKENAME"] = "Map" }));
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.WildMatch, "*", "Map"), prv.MatchToMappingPattern("werftg", new Dictionary<string, string>() { ["*"] = "Map" }));
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.None, string.Empty, string.Empty), prv.MatchToMappingPattern("", new Dictionary<string, string>() { ["FAKENAME"] = "Map" }));
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.None, string.Empty, string.Empty), prv.MatchToMappingPattern("", new Dictionary<string, string>() { ["FAKENAME"] = "Map" }));
+            Assert.AreEqual<(MatchPatternResult, string, string)>((MatchPatternResult.None, string.Empty, string.Empty), prv.MatchToMappingPattern("FaKeNamE", new Dictionary<string, string>()));
 
         }
 
@@ -179,7 +192,7 @@ namespace DotNet.Memory.Logger.Test
 
             logger = nLogLoggerProvider.CreateLogger("RoundNAmEs");
             Assert.IsInstanceOfType(logger, typeof(Microsoft.Extensions.Logging.Abstractions.NullLogger));
-            
+
         }
     }
 }

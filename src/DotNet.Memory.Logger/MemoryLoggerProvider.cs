@@ -60,14 +60,19 @@ namespace DotNet.Memory.Logger
                 {
                     match = true;
                 }
-                else if (namePattern.Length > 0)
+                else if (namePattern.Length > 1)
                 {
-                    if (namePattern[0] == '*')
+                    if ((namePattern.Length > 2) && (namePattern[0] == '*') && (namePattern[namePattern.Length - 1] == '*'))
+                    {
+                        string tmp = namePattern.Replace("*", "");
+                        match = categoryName.ToLower().Contains(tmp.ToLower());
+                    }
+                    else if (namePattern[0] == '*')
                     {
                         string tmp = namePattern.Replace("*", "");
                         match = categoryName.StartsWith(tmp, StringComparison.InvariantCultureIgnoreCase);
                     }
-                    else if (namePattern[namePattern.Length-1] == '*')
+                    else if (namePattern[namePattern.Length - 1] == '*')
                     {
                         string tmp = namePattern.Replace("*", "");
                         match = categoryName.StartsWith(tmp, StringComparison.InvariantCultureIgnoreCase);

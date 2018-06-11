@@ -15,6 +15,18 @@ using System.Collections.Generic;
 
 namespace DotNet.NLogger.NetCore
 {
+    /// <summary>
+    /// The match pattern results.
+    /// </summary>
+    public enum MatchPatternResult
+    {
+        None,
+        Exact,
+        EndWith,
+        StartWith,
+        Contains,
+        WildMatch
+    }
 
     /// <summary>
     /// The provider for the <see cref="NLogLoggerProvider"/>.
@@ -66,30 +78,27 @@ namespace DotNet.NLogger.NetCore
                 return logger;
             }
 
-            string tmpName = MatchToPattern(categoryName, _nLogSettings.AcceptedCategoryNames);
-            if (tmpName != string.Empty)
+            (MatchPatternResult result, string pattern) = MatchToPatternList(categoryName, _nLogSettings.AcceptedCategoryNames);
+            if (result != MatchPatternResult.None)
             {
-                var tmpAliasName = MatchToPattern(categoryName, _nLogSettings.AcceptedAliasesCategoryNames.Keys);
-                if (tmpAliasName == string.Empty)
+                (MatchPatternResult mapResult2, string mapPattern2, string mapTo2) = MatchToMappingPattern(categoryName, _nLogSettings.AcceptedAliasesCategoryNames);
+                if (mapResult2 != MatchPatternResult.None)
                 {
-                    var logger = new NLogLogger(categoryName, _nLogSettings, _scopeProvider ?? new LoggerExternalScopeProvider());
+                    var logger = new NLogLogger(mapTo2, _nLogSettings, _scopeProvider ?? new LoggerExternalScopeProvider());
                     NLogLoggers[categoryName] = new WeakReference<NLogLogger>(logger);
                     return logger;
                 }
                 else
                 {
-                    tmpAliasName = _nLogSettings.AcceptedAliasesCategoryNames[tmpAliasName];
-                    var logger = new NLogLogger(tmpAliasName, _nLogSettings, _scopeProvider ?? new LoggerExternalScopeProvider());
+                    var logger = new NLogLogger(categoryName, _nLogSettings, _scopeProvider ?? new LoggerExternalScopeProvider());
                     NLogLoggers[categoryName] = new WeakReference<NLogLogger>(logger);
                     return logger;
                 }
             }
-
-            tmpName = MatchToPattern(categoryName, _nLogSettings.AcceptedAliasesCategoryNames.Keys);
-            if (tmpName != string.Empty)
+            (MatchPatternResult mapResult, string mapPattern, string mapTo) = MatchToMappingPattern(categoryName, _nLogSettings.AcceptedAliasesCategoryNames);
+            if (mapResult != MatchPatternResult.None)
             {
-                var tmpAliasName = _nLogSettings.AcceptedAliasesCategoryNames[tmpName];
-                var logger = new NLogLogger(tmpAliasName, _nLogSettings, _scopeProvider ?? new LoggerExternalScopeProvider());
+                var logger = new NLogLogger(mapTo, _nLogSettings, _scopeProvider ?? new LoggerExternalScopeProvider());
                 NLogLoggers[categoryName] = new WeakReference<NLogLogger>(logger);
                 return logger;
             }
@@ -97,23 +106,44 @@ namespace DotNet.NLogger.NetCore
             return Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
         }
 
-        public string MatchToPattern(string categoryName, IEnumerable<string> namePatterns)
+
+
+        /// <summary>
+        /// Selects the proper category name which will be used as NLog name. 
+        /// The category name should be exact match or like "*endwith", or like "startwith*" , or like "*" (all to match).
+        /// If pattern "*", so the category name will be returned. 
+        /// If pattern "*endwith", so the "endwith" will be returned. 
+        /// If pattern "startwith*", so the "startwith" will be returned. 
+        /// </summary>
+        /// <param name="categoryName">The input category name.</param>
+        /// <param name="namePatterns">The list of matching patterns.</param>
+        /// <returns>Returns the NLog name or empty string and matching result.</returns>
+        public (MatchPatternResult, string) MatchToPatternList(string categoryName, List<string> namePatterns)
         {
 
-            foreach (var namePattern in namePatterns)
+            foreach (var pattern in namePatterns)
             {
+                var namePattern = pattern.Trim();
                 if (string.Compare(namePattern, categoryName, true) == 0)
                 {
-                    return namePattern;
+                    return (MatchPatternResult.Exact, namePattern);
                 }
                 else if (namePattern.Length > 1)
                 {
-                    if (namePattern[0] == '*')
+                    if ((namePattern.Length > 2) && (namePattern[0] == '*') && (namePattern[namePattern.Length - 1] == '*'))
+                    {
+                        string tmp = namePattern.Replace("*", "");
+                        if (categoryName.ToLower().Contains(tmp.ToLower()))
+                        {
+                            return (MatchPatternResult.Contains, namePattern);
+                        }
+                    }
+                    else if (namePattern[0] == '*')
                     {
                         string tmp = namePattern.Replace("*", "");
                         if (categoryName.EndsWith(tmp, StringComparison.InvariantCultureIgnoreCase))
                         {
-                            return namePattern;
+                            return (MatchPatternResult.EndWith, namePattern);
                         }
                     }
                     else if (namePattern[namePattern.Length - 1] == '*')
@@ -121,13 +151,76 @@ namespace DotNet.NLogger.NetCore
                         string tmp = namePattern.Replace("*", "");
                         if (categoryName.StartsWith(tmp, StringComparison.InvariantCultureIgnoreCase))
                         {
-                            return namePattern;
+                            return (MatchPatternResult.StartWith, namePattern);
                         }
                     }
                 }
+                else if (namePattern.Length == 1 && namePattern[0] == '*')
+                {
+                    return (MatchPatternResult.WildMatch, "*");
+                }
             }
-            return string.Empty;
+            return (MatchPatternResult.None, string.Empty);
         }
+
+        /// <summary>
+        /// Selects the proper category name which will be used as NLog name. 
+        /// The category name should be exact match or like "*endwith", or like "startwith*" , or like "*" (all to match).
+        /// If pattern "*", so the category name will be returned. 
+        /// If pattern "*endwith", so the "endwith" will be returned. 
+        /// If pattern "startwith*", so the "startwith" will be returned. 
+        /// </summary>
+        /// <param name="categoryName">The input category name.</param>
+        /// <param name="mapPatterns">The list of matching patterns.</param>
+        /// <returns>Returns the NLog name or empty string and matching result.</returns>
+        public (MatchPatternResult, string, string) MatchToMappingPattern(string categoryName, Dictionary<string, string> mapPatterns)
+        {
+
+            foreach (var mapKvPattern in mapPatterns)
+            {
+                var pattern = mapKvPattern.Key;
+                var mapTo = mapKvPattern.Value;
+
+                if (string.Compare(pattern, categoryName, true) == 0)
+                {
+                    return (MatchPatternResult.Exact, pattern, mapTo);
+                }
+                else if (pattern.Length > 1)
+                {
+                    if ((pattern.Length > 2) && (pattern[0] == '*') && (pattern[pattern.Length - 1] == '*'))
+                    {
+                        string tmp = pattern.Replace("*", "");
+                        if (categoryName.ToLower().Contains(tmp.ToLower()))
+                        {
+                            return (MatchPatternResult.Contains, pattern,mapTo);
+                        }
+                    }
+                    else if (pattern[0] == '*')
+                    {
+                        string tmp = pattern.Replace("*", "");
+                        if (categoryName.EndsWith(tmp, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            return (MatchPatternResult.EndWith, pattern, mapTo);
+                        }
+                    }
+                    else if (pattern[pattern.Length - 1] == '*')
+                    {
+                        string tmp = pattern.Replace("*", "");
+                        if (categoryName.StartsWith(tmp, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            return (MatchPatternResult.StartWith, pattern, mapTo);
+                        }
+                    }
+                }
+                else if (pattern.Length == 1 && pattern[0] == '*')
+                {
+                    return (MatchPatternResult.WildMatch, pattern, mapTo);
+                }
+            }
+            return (MatchPatternResult.None, string.Empty, string.Empty);
+        }
+
+
 
         /// <inheritdoc />
         public void Dispose()
