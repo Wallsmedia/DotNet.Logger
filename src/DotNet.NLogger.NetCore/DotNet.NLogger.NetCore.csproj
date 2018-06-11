@@ -15,7 +15,7 @@
     <Description>Dot Net NLog  logger wrapper for Microsoft.Extensions.Logging.</Description>
     
     <Authors>Wallsmedia Ltd</Authors>
-    <Copyright>Copyright © Artem Paskhin 2018. All rights reserved.</Copyright>
+    <Copyright>Copyright © Artem &amp; Alex Paskhin 2018. All rights reserved.</Copyright>
     
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
