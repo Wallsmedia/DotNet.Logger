@@ -1,18 +1,23 @@
 # DotNet.NLogger.NetCore
 
-DotNet.NLogger.NetCore is an adapter between [NLog](https://github.com/NLog/NLog) and [Microsoft.Extensions.Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x).
+**DotNet.NLogger.NetCore** is an adapter between [NLog](https://github.com/NLog/NLog) and [Microsoft.Extensions.Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x).
 
-It allows to simplify the implementation of using NLog by utilizing [ILoggerFactory](https://github.com/aspnet/Logging) and [ILogger](https://github.com/aspnet/Logging) interfaces in an application.
+It allows to simplify using NLog by utilizing [ILoggerFactory](https://github.com/aspnet/Logging) and [ILogger](https://github.com/aspnet/Logging) interfaces in an application.
 
 [NLog](https://github.com/NLog/NLog) is a flexible and free logging platform for various .NET platforms, including .NET standard. NLog makes it easy to write to several targets. (database, file, console) and change the logging configuration on-the-fly.
 
+## Nuget.org
+
+- Nuget package [DotNet.NLogger.NetCore](https://www.nuget.org/packages/DotNet.NLog.NetCore/)
+- Nuget package [DotNet.Memory.Logger](https://www.nuget.org/packages/DotNet.Memory.Logger/)
 
 
 ## Adding DotNet.NLogger.NetCore
 
+
 You have to define two configurations:
 
- - [NLog configuration](https://github.com/NLog/NLog/wiki/Configuration-file) xml file like that:
+ - Create the  [NLog configuration](https://github.com/NLog/NLog/wiki/Configuration-file) xml for Example:
  ``` xml
  <?xml version="1.0" encoding="utf-8" ?>
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
@@ -69,11 +74,15 @@ You have to define two configurations:
 
 </nlog>
  ```
-  and 
+   
+- Create **DotNet.NLogger.NetCore** configuration section in "appsettings.json". The **NLogLoggerSettings** section defines the Category Name "filter" and Category Name "mapper". 
 
-- Category Name "filer" and category name "mapper". It used to pass category name through "filter"
- and map MS logger category names that defined in the NLog xml file configuration, like : **<logger name="CommonInfo"**.
-``` 
+ The **Category Name "filter"** is used to filter in accepted category names. It is expected that the category name is exact match to **<logger name="...."**  in the NLog configuration.
+
+ The **Category Name "mapper"** is used to filter in category names and map them onto new name that expected to be match to **<logger name="..."** in the NLog configuration.
+
+```
+{
 "NLogLoggerSettings": {
     "AcceptedCategoryNames": [ /* Filter of category name */
       "ConsoleInfo",   /* category name accepted as a "NLog logger name" */
@@ -103,9 +112,10 @@ You have to define two configurations:
     "AcceptedAliasesCategoryNames:*": "ConsoleError"
 
   }
+}
 ```
 
-In the program for .Net Core web service add the following lines into web host start up initialization.
+After defining the configurations, add in the Web Host Builder configuring of Microsoft.Extensions.Logging.LoggerFactory the following initialization code:
 
 ``` C#
 
@@ -131,16 +141,21 @@ In the program for .Net Core web service add the following lines into web host s
       }
 ```
 
-## logging.AddConfiguration
-If you decided to use additional filtering above the filtering that described above by adding 
+## Example project
+
+See sample project [Using Nlog in .Net Core  Rest Web Application](https://github.com/Wallsmedia/DotNet.Logger/tree/master/samples/RestWebApplication)
+
+## Microsoft.Extensions.Logging - Configuration
+If you decided to use additional filtering from **Microsoft.Extensions.Logging** over the filtering that provided  with **DotNet.NLogger.NetCore** by adding configuration:
 
 ``` C#
-//logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+ logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
 ```
 
-or it will be added  by default net core > 2.0. see [WebHost.cs](https://github.com/aspnet/MetaPackages/blob/dev/src/Microsoft.AspNetCore/WebHost.cs))
+or it will be added  by default in .Net Core > 2.0. see [WebHost.cs](https://github.com/aspnet/MetaPackages/blob/dev/src/Microsoft.AspNetCore/WebHost.cs))
 
-So, I do recommend to read how configure the "Logging" section from ASP.NET CORE web guide [Log filtering](https://docs.microsoft.com/en-gb/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x#log-filtering). 
+So, It is recommend to read "how to configure the Logging'" section from ASP.NET CORE web guide [Log filtering](https://docs.microsoft.com/en-gb/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x#log-filtering). 
+
 
 # DotNet.Memory.Logger
 .NET Memory Logger is a simple extension to log into memory by using [ConcurrentQueue\<T\>](https://docs.microsoft.com/en-gb/dotnet/api/system.collections.concurrent.concurrentqueue-1) collections
