@@ -73,7 +73,7 @@ You have to define two configurations:
 
 - Category Name "filer" and category name "mapper". It used to pass category name through "filter"
  and map MS logger category names that defined in the NLog xml file configuration, like : **<logger name="CommonInfo"**.
-``` json
+``` 
 "NLogLoggerSettings": {
     "AcceptedCategoryNames": [ /* Filter of category name */
       "ConsoleInfo",   /* category name accepted as a "NLog logger name" */
