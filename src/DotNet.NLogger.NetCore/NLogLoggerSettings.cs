@@ -31,7 +31,7 @@ namespace DotNet.NLogger.NetCore
         /// The name can have the wild char '*' at the end, which means "start with"; or at the beginning , which means "end with".
         /// </summary>
         [DataMember]
-        public Dictionary<string,string> AcceptedAliasesCategoryNames { get; set; } = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+        public Dictionary<string, string> AcceptedAliasesCategoryNames { get; set; } = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
         [DataMember]
         public Microsoft.Extensions.Logging.LogLevel? MinLevel { get; set; }
@@ -40,7 +40,12 @@ namespace DotNet.NLogger.NetCore
         /// <summary>
         /// The function used to filter events based on the log level and category name.
         /// </summary>
-        public Func< string, Microsoft.Extensions.Logging.LogLevel, bool> Filter { get; set; }
-        
+        public Func<string, Microsoft.Extensions.Logging.LogLevel, bool> Filter { get; set; }
+
+        /// <summary>
+        /// Gets or sets the include scope into the message.
+        /// </summary>
+        [DataMember]
+        public bool IncludeScopes { get; set; }
     }
 }

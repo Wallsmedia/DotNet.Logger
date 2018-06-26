@@ -84,6 +84,7 @@ You have to define two configurations:
 ```
 {
 "NLogLoggerSettings": {
+    "IncludeScopes": true,
     "AcceptedCategoryNames": [ /* Filter of category name */
       "ConsoleInfo",   /* category name accepted as a "NLog logger name" */
       "CommonInfo",    /* category name accepted as a "NLog logger name" */

@@ -44,5 +44,11 @@ namespace DotNet.Memory.Logger
         [IgnoreDataMember]
         public Func<string, LogLevel, bool> Filter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the include scope into the message.
+        /// </summary>
+        [DataMember]
+
+        public bool IncludeScopes { get; set; }
     }
 }

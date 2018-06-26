@@ -133,10 +133,13 @@ namespace DotNet.Memory.Logger
             var message = formatter(state, exception);
 
             string scopeString = String.Empty;
-            int count = GetScopeInformation(logBuilder, _scopeProvider);
-            if (count > 0)
+            if (_settings.IncludeScopes)
             {
-                scopeString = logBuilder.ToString();
+                int count = GetScopeInformation(logBuilder, _scopeProvider);
+                if (count > 0)
+                {
+                    scopeString = logBuilder.ToString();
+                }
             }
 
             if (!string.IsNullOrEmpty(message) || exception != null)
@@ -186,7 +189,7 @@ namespace DotNet.Memory.Logger
         /// <param name="entry">The log message entry.</param>
         private void PushIntoQueue(MemoryLogEntry entry)
         {
-            if(LogMessages.Count >= _settings.MemoryCacheSize)
+            if (LogMessages.Count >= _settings.MemoryCacheSize)
             {
                 MemoryLogEntry result;
                 LogMessages.TryDequeue(out result);

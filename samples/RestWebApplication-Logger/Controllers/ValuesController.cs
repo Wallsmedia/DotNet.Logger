@@ -24,15 +24,11 @@ namespace RestWebApplication.Controllers
 
         ILoggerFactory _logFactory;
         ILogger _logInfo;
-        ILogger _logFatalError;
-        ILogger _logBusinessError;
 
         public ValuesController(ILoggerFactory logFactory)
         {
             _logFactory = logFactory;
-            _logInfo = _logFactory?.CommonInfoLogger() ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            _logFatalError = _logFactory?.FatalErrorLogger() ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
-            _logBusinessError = _logFactory?.BusinessErrorLogger() ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
+            _logInfo = _logFactory?.CreateLogger(Component) ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
         }
 
         // GET api/values
@@ -50,7 +46,7 @@ namespace RestWebApplication.Controllers
             _logInfo.LogInformation("Get(int id) has been invoked");
             if (id  == 0)
             {
-                _logBusinessError.LogError($"Component:{Component} Process :{ProcessName}  the  value should be more then zero");
+                _logInfo.LogError($"Component:{Component} Process :{ProcessName}  the  value should be more then zero");
             }
             return "value";
         }
@@ -66,7 +62,7 @@ namespace RestWebApplication.Controllers
             }
             catch (Exception ex)
             {
-                _logFatalError.LogCritical(ex, $"Component:{Component} Process :{ProcessName}  thrown the Exception");
+                _logInfo.LogCritical(ex, $"Component:{Component} Process :{ProcessName}  thrown the Exception");
             }
         }
 
@@ -78,7 +74,7 @@ namespace RestWebApplication.Controllers
 
             if(value == null)
             {
-                _logBusinessError.LogError($"Component:{Component} Process :{ProcessName}  the  value should not null for method PUT");
+                _logInfo.LogError($"Component:{Component} Process :{ProcessName}  the  value should not null for method PUT");
             }
         }
 

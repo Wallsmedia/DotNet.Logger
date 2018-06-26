@@ -128,14 +128,16 @@ namespace DotNet.NLogger.NetCore
 
             var message = formatter(state, exception);
 
-            string scopeString = String.Empty;
-            int count = GetScopeInformation(logBuilder, _scopeProvider);
-            if (count > 0)
+            if (_settings.IncludeScopes)
             {
-                logBuilder.Append(message);
-                message = logBuilder.ToString();
+                string scopeString = String.Empty;
+                int count = GetScopeInformation(logBuilder, _scopeProvider);
+                if (count > 0)
+                {
+                    logBuilder.Append(message);
+                    message = logBuilder.ToString();
+                }
             }
-
             LogEventInfo logEventInfo = LogEventInfo.Create(nLogLogLevel, Logger.Name, exception, null, message);
 
             Logger.Log(logEventInfo);
