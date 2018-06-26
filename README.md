@@ -17,7 +17,7 @@ It allows to simplify using NLog by utilizing [ILoggerFactory](https://github.co
 
 You have to define two configurations:
 
- - Create the  [NLog configuration](https://github.com/NLog/NLog/wiki/Configuration-file) xml for Example:
+### Create the  [NLog configuration](https://github.com/NLog/NLog/wiki/Configuration-file) xml
  ``` xml
  <?xml version="1.0" encoding="utf-8" ?>
 <nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
@@ -75,38 +75,39 @@ You have to define two configurations:
 </nlog>
  ```
    
-- Create **DotNet.NLogger.NetCore** configuration section in "appsettings.json". The **NLogLoggerSettings** section defines the Category Name "filter" and Category Name "mapper". 
+### Create **NLogLoggerSettings** configuration section in "appsettings.json".
 
- The **Category Name "filter"** is used to filter in accepted category names. It is expected that the category name is exact match to **<logger name="...."**  in the NLog configuration.
+The **NLogLoggerSettings** section defines the Category Name "filter" and Category Name "mapper". 
 
- The **Category Name "mapper"** is used to filter in category names and map them onto new name that expected to be match to **<logger name="..."** in the NLog configuration.
-
+ 
 ```
 {
 "NLogLoggerSettings": {
+
     "IncludeScopes": true,
+
     "AcceptedCategoryNames": [ /* Filter of category name */
-      "ConsoleInfo",   /* category name accepted as a "NLog logger name" */
-      "CommonInfo",    /* category name accepted as a "NLog logger name" */
-      "ConsoleError",  /* category name accepted as a "NLog logger name" */
-      "FatalError",    /* category name accepted as a "NLog logger name" */
-      "BusinessError", /* category name accepted as a "NLog logger name" */
-      "*Error*",       /* category name contains "Error" accepted as a "NLog logger name" */
-      "*Info",         /* category name end with "Info" accepted as a "NLog logger name" */
-      "Com*",          /* category name start with "Com" accepted as a "NLog logger name" */
-      "*"              /* any category name  will be accepted accepted as a "NLog logger name" */
+      "ConsoleInfo",   /* The category name is accepted as a "NLog logger name" */
+      "CommonInfo",    /* The category name is accepted as a "NLog logger name" */
+      "ConsoleError",  /* The category name is accepted as a "NLog logger name" */
+      "FatalError",    /* The category name is accepted as a "NLog logger name" */
+      "BusinessError", /* The category name is accepted as a "NLog logger name" */
+      "*Error*",       /* The category name that contains "Error" is accepted as a "NLog logger name" */
+      "*Info",         /* The category name that ends with "Info" is accepted as a "NLog logger name" */
+      "Com*",          /* The category name that starts with "Com" is accepted as a "NLog logger name" */
+      "*"              /* Any category name will be accepted  as a "NLog logger name" */
     ],
 
     /* Map category name "ABC" to "NLog logger name" = "ConsoleError" */
     "AcceptedAliasesCategoryNames:ABD": "ConsoleError"  
     
-    /* Map category name end with "*Hosted" to "NLog logger name" = "ConsoleError" */
+    /* Map category name that ends with "*Hosted" to "NLog logger name" = "ConsoleError" */
     "AcceptedAliasesCategoryNames:*Hosted": "ConsoleError"  
 
-    /* Map category name start with "Microsoft.AspNetCore*" to "NLog logger name" = "ConsoleError" */
+    /* Map category name that starts with "Microsoft.AspNetCore*" to "NLog logger name" = "ConsoleError" */
     "AcceptedAliasesCategoryNames:Microsoft.AspNetCore*": "ConsoleError" 
 
-    /* Map category name contains "*AspNetCore*" to "NLog logger name" = "ConsoleError"*/
+    /* Map category name that contains "*AspNetCore*" to "NLog logger name" = "ConsoleError"*/
     "AcceptedAliasesCategoryNames:*AspNetCore*": "ConsoleError"
 
     /* Map any category  to "NLog logger name" = "ConsoleError" */
@@ -115,6 +116,12 @@ You have to define two configurations:
   }
 }
 ```
+- The **AcceptedCategoryNames** - "category name filter" is used to **filter-in** category names. It is expected that the category name is exact match to **<logger name="...."**  in the NLog xml configuration.
+
+- The **AcceptedAliasesCategoryNames** - "category name mapper" is used to **filter-in** category names and map them onto new name that expected to be match to **<logger name="..."** in the NLog xml configuration.
+
+
+### Web Host Builder configuration
 
 After defining the configurations, add in the Web Host Builder configuring of Microsoft.Extensions.Logging.LoggerFactory the following initialization code:
 
@@ -142,9 +149,11 @@ After defining the configurations, add in the Web Host Builder configuring of Mi
       }
 ```
 
-## Example project
+### Example projects
 
-See sample project [Using Nlog in .Net Core  Rest Web Application](https://github.com/Wallsmedia/DotNet.Logger/tree/master/samples/RestWebApplication)
+See sample of pure **NLog** style project [Using Adaptation Nlog in .Net Core  Rest Web Application](https://github.com/Wallsmedia/DotNet.Logger/tree/master/samples/RestWebApplication)
+
+See sample of pure **.Net Core Logger** => NLog style project [Using Logger + Nlog in .Net Core  Rest Web Application](https://github.com/Wallsmedia/DotNet.Logger/tree/master/samples/RestWebApplication-Logger)
 
 ## Microsoft.Extensions.Logging - Configuration
 If you decided to use additional filtering from **Microsoft.Extensions.Logging** over the filtering that provided  with **DotNet.NLogger.NetCore** by adding configuration:
@@ -153,7 +162,7 @@ If you decided to use additional filtering from **Microsoft.Extensions.Logging**
  logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
 ```
 
-or it will be added  by default in .Net Core > 2.0. see [WebHost.cs](https://github.com/aspnet/MetaPackages/blob/dev/src/Microsoft.AspNetCore/WebHost.cs))
+or it will be added  by default in .Net Core > 2.0+  see [WebHost.cs](https://github.com/aspnet/MetaPackages/blob/dev/src/Microsoft.AspNetCore/WebHost.cs))
 
 So, It is recommend to read "how to configure the Logging'" section from ASP.NET CORE web guide [Log filtering](https://docs.microsoft.com/en-gb/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x#log-filtering). 
 
@@ -163,7 +172,54 @@ So, It is recommend to read "how to configure the Logging'" section from ASP.NET
 
 
 ## Adding DotNet.Memory.Logger
-T.B.D - ASAP
 
+Add in the Web Host Builder configuring of Microsoft.Extensions.Logging.LoggerFactory the following initialization code:
+
+``` C#
+
+     .ConfigureLogging((hostingContext, logging) =>
+       {
+           // ** Add DotNet.Memory.Logger
+          logJsonCgf = hostingContext.Configuration.GetSection(nameof(MemoryLoggerSettings));
+    
+          if (!logJsonCgf.Exists())
+          {
+              throw new MissingMemberException($"Missing configuration section '{nameof(MemoryLoggerSettings)}'");
+          }
+    
+          logging.AddMemoryLogger(logJsonCgf);
+      }
+```
+
+### Create **NLogLoggerSettings** configuration section in "appsettings.json".
+
+The **MemoryLoggerSettings** section defines the Category Name "filter" and Category Name "mapper". 
+
+ 
+```
+{
+"MemoryLoggerSettings": {
+
+    "IncludeScopes": true,
+
+    "AcceptedCategoryNames": [ /* Filter of category name */
+      "ConsoleInfo",   /* Exact category name is accepted */
+      "CommonInfo",    /* Exact category name is accepted */
+      "ConsoleError",  /* Exact category name is accepted */
+      "FatalError",    /* Exact category name is accepted */
+      "BusinessError", /* Exact category name is accepted */
+      "*Error*",       /* The category name that contains "Error" is accepted */
+      "*Info",         /* The category name that ends with "Info" is accepted */
+      "Com*",          /* The category name that starts with "Com" is accepted */
+      "*"              /* Any category name is accepted */
+    ],
+
+    "MemoryCacheSize":4096
+
+
+  }
+}
+```
+- The **AcceptedCategoryNames** - "category name filter" is used to **filter-in** category names. It is expected that the category name is exact match to **<logger name="...."**  in the NLog xml configuration.
 
 
