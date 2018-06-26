@@ -15,19 +15,26 @@ using Microsoft.Extensions.Logging;
 
 namespace RestWebApplication.Controllers
 {
+
     [Route("api/[controller]")]
     public class ValuesController : ControllerBase
     {
+        private static string Component { get; } = typeof(ValuesController).GetType().Assembly.GetName().Name;
+        private static string ProcessName { get; } = nameof(ValuesController);
+
         ILoggerFactory _logFactory;
         ILogger _logInfo;
         ILogger _logFatalError;
+        ILogger _logBusinessError;
 
         public ValuesController(ILoggerFactory logFactory)
         {
             _logFactory = logFactory;
-            _logInfo = _logFactory?.CommonInfoLogger();
-            _logFatalError = _logFactory?.FatalErrorLogger();
+            _logInfo = _logFactory?.CommonInfoLogger() ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
+            _logFatalError = _logFactory?.FatalErrorLogger() ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
+            _logBusinessError = _logFactory?.BusinessErrorLogger() ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance;
         }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -41,6 +48,10 @@ namespace RestWebApplication.Controllers
         public string Get(int id)
         {
             _logInfo.LogInformation("Get(int id) has been invoked");
+            if (id  == 0)
+            {
+                _logBusinessError.LogError($"Component:{Component} Process :{ProcessName}  the  value should be more then zero");
+            }
             return "value";
         }
 
@@ -49,6 +60,14 @@ namespace RestWebApplication.Controllers
         public void Post([FromBody] string value)
         {
             _logInfo.LogInformation("Post([FromBody] string value) has been invoked");
+            try
+            {
+                throw new ExecutionEngineException("Demo exception for NLog ");
+            }
+            catch (Exception ex)
+            {
+                _logFatalError.LogCritical(ex, $"Component:{Component} Process :{ProcessName}  thrown the Exception");
+            }
         }
 
         // PUT api/values/5
@@ -56,6 +75,11 @@ namespace RestWebApplication.Controllers
         public void Put(int id, [FromBody] string value)
         {
             _logInfo.LogInformation("Put(int id, [FromBody] string value) has been invoked");
+
+            if(value == null)
+            {
+                _logBusinessError.LogError($"Component:{Component} Process :{ProcessName}  the  value should not null for method PUT");
+            }
         }
 
         // DELETE api/values/5

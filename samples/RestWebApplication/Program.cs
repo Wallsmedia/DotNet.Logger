@@ -45,7 +45,7 @@ namespace RestWebApplication
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
-
+        // The borrowed source code from the location: https://github.com/aspnet/MetaPackages/blob/dev/src/Microsoft.AspNetCore/WebHost.cs
         private static IWebHostBuilder CreateDefaultBuilder(string[] args)
         {
 
@@ -113,7 +113,7 @@ namespace RestWebApplication
                  }
                  logging.AddMemoryLogger(logJsonCgf);
 
-                 //logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                 logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
                  //logging.AddConsole();
                  //logging.AddDebug();
              })
