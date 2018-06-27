@@ -79,6 +79,11 @@ namespace DotNet.Memory.Logger
                     }
 
                 }
+                else if (namePattern.Length == 1 && namePattern[0] == '*')
+                {
+                    match = true;
+                }
+
                 if (match)
                 {
                     var logger = new MemoryLogger(categoryName, _mLogSettings, _scopeProvider ?? new LoggerExternalScopeProvider());

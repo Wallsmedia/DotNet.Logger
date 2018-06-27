@@ -1,5 +1,9 @@
 # DotNet.NLogger.NetCore
 
+#### Version 2.1.2
+ - Add support the feature turn on/off scope logging
+ - Support SDK v.2.1.1
+
 **DotNet.NLogger.NetCore** is an adapter between [NLog](https://github.com/NLog/NLog) and [Microsoft.Extensions.Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x).
 
 It allows to simplify using NLog by utilizing [ILoggerFactory](https://github.com/aspnet/Logging) and [ILogger](https://github.com/aspnet/Logging) interfaces in an application.
@@ -170,6 +174,10 @@ So, It is recommend to read "how to configure the Logging'" section from ASP.NET
 # DotNet.Memory.Logger
 .NET Memory Logger is a simple extension to log into memory by using [ConcurrentQueue\<T\>](https://docs.microsoft.com/en-gb/dotnet/api/system.collections.concurrent.concurrentqueue-1) collections
 
+#### Version 2.1.2
+ - Add support the feature turn on/off scope logging
+ - Support SDK v.2.1.1
+
 
 ## Adding DotNet.Memory.Logger
 
@@ -222,4 +230,8 @@ The **MemoryLoggerSettings** section defines the Category Name "filter" and Cate
 ```
 - The **AcceptedCategoryNames** - "category name filter" is used to **filter-in** category names. It is expected that the category name is exact match to **<logger name="...."**  in the NLog xml configuration.
 
+
+### Example project
+
+See sample of pure memory + NLog logging  style project [Using Adaptation Nlog in .Net Core  Rest Web Application](https://github.com/Wallsmedia/DotNet.Logger/tree/master/samples/RestWebApplication-MemLog)
 

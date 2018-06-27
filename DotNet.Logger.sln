@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWebApplication", "sampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWebApplication-Logger", "samples\RestWebApplication-Logger\RestWebApplication-Logger.csproj", "{16F1A24E-0A60-49CE-B85A-167A1E911BA2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestWebApplication-MemLog", "samples\RestWebApplication-MemLog\RestWebApplication-MemLog.csproj", "{E683ABD5-B5F6-41B9-B310-9C90DF122516}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{16F1A24E-0A60-49CE-B85A-167A1E911BA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16F1A24E-0A60-49CE-B85A-167A1E911BA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16F1A24E-0A60-49CE-B85A-167A1E911BA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E683ABD5-B5F6-41B9-B310-9C90DF122516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E683ABD5-B5F6-41B9-B310-9C90DF122516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E683ABD5-B5F6-41B9-B310-9C90DF122516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E683ABD5-B5F6-41B9-B310-9C90DF122516}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{1DF081B1-08CB-4FD1-B8CE-4A48EB65E65B} = {58A40194-3598-484D-A9A3-7208C0C229B9}
 		{B468AAF0-EA49-4D0A-B6D5-1D5999B17263} = {9B66AD7E-362F-428C-9B1D-A06B4DC396A5}
 		{16F1A24E-0A60-49CE-B85A-167A1E911BA2} = {9B66AD7E-362F-428C-9B1D-A06B4DC396A5}
+		{E683ABD5-B5F6-41B9-B310-9C90DF122516} = {9B66AD7E-362F-428C-9B1D-A06B4DC396A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F98EE67-4E05-4208-9C73-209F7CF177D1}
