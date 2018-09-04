@@ -2,7 +2,7 @@
 
 #### Version 2.1.2
  - Add support the feature turn on/off scope logging
- - Support SDK v.2.1.1
+ - Support SDK v.2.1.3
 
 **DotNet.NLogger.NetCore** is an adapter between [NLog](https://github.com/NLog/NLog) and [Microsoft.Extensions.Logging](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-2.1&tabs=aspnetcore2x).
 

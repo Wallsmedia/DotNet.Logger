@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// \\     |/\  /||
+//  \\ \\ |/ \/ ||
+//   \//\\/|  \ || 
+// Copyright © Artem & Alexander Paskhin 2018. All rights reserved.
+// Wallsmedia LTD 2018:{Artem & Alexander Paskhin}
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Dot Net Sample logger for Microsoft.Extensions.Logging.
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 //using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace RestWebApplication
 {

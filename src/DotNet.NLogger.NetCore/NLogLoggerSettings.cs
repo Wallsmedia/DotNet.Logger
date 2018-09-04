@@ -1,8 +1,8 @@
 ﻿// \\     |/\  /||
 //  \\ \\ |/ \/ ||
 //   \//\\/|  \ || 
-// Copyright © Artem Paskhin 2018. All rights reserved.
-// Wallsmedia LTD 2018:{Artem Paskhin}
+// Copyright © Artem & Alexander Paskhin 2018. All rights reserved.
+// Wallsmedia LTD 2018:{Artem & Alexander Paskhin}
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 //
 //  Dot Net NLog  logger wrapper for Microsoft.Extensions.Logging.

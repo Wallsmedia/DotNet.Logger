@@ -1,8 +1,8 @@
 // \\     |/\  /||
 //  \\ \\ |/ \/ ||
 //   \//\\/|  \ || 
-// Copyright © Artem Paskhin 2013-2017. All rights reserved.
-// Wallsmedia LTD 2018:{Artem Paskhin}
+// Copyright © Artem & Alexander Paskhin 2013-2018. All rights reserved.
+// Wallsmedia LTD 2018:{Artem & Alexander Paskhin}
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Dot NET NLog Logger Test
 
@@ -11,9 +11,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace DotNet.Memory.Logger.Test
 {

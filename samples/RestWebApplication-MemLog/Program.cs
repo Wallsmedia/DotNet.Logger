@@ -1,22 +1,18 @@
 ﻿// \\     |/\  /||
 //  \\ \\ |/ \/ ||
 //   \//\\/|  \ || 
-// Copyright © Artem Paskhin 2018. All rights reserved.
-// Wallsmedia LTD 2018:{Artem Paskhin}
+// Copyright © Artem & Alexander Paskhin 2018. All rights reserved.
+// Wallsmedia LTD 2018:{Artem & Alexander Paskhin}
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 // Dot Net Sample logger for Microsoft.Extensions.Logging.
 
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using DotNet.Memory.Logger;
 using DotNet.Memory.NetCore;
 using DotNet.NLogger.NetCore;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HostFiltering;
 using Microsoft.AspNetCore.Hosting;
