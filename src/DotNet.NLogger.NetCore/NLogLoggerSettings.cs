@@ -33,13 +33,16 @@ namespace DotNet.NLogger.NetCore
         [DataMember]
         public Dictionary<string, string> AcceptedAliasesCategoryNames { get; set; } = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
+        /// <summary>
+        /// The minimal logger level.
+        /// </summary>
         [DataMember]
         public Microsoft.Extensions.Logging.LogLevel? MinLevel { get; set; }
 
-        [IgnoreDataMember]
         /// <summary>
         /// The function used to filter events based on the log level and category name.
         /// </summary>
+        [IgnoreDataMember]
         public Func<string, Microsoft.Extensions.Logging.LogLevel, bool> Filter { get; set; }
 
         /// <summary>

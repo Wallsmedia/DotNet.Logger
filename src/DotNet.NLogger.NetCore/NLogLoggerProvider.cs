@@ -20,11 +20,29 @@ namespace DotNet.NLogger.NetCore
     /// </summary>
     public enum MatchPatternResult
     {
+        /// <summary>
+        /// Not match
+        /// </summary>
         None,
+        /// <summary>
+        /// Has exact match
+        /// </summary>
         Exact,
+        /// <summary>
+        /// Has endwith match
+        /// </summary>
         EndWith,
+        /// <summary>
+        /// Has  startwith match
+        /// </summary>
         StartWith,
+        /// <summary>
+        /// Has contains match
+        /// </summary>
         Contains,
+        /// <summary>
+        /// Has wild char match 
+        /// </summary>
         WildMatch
     }
 
@@ -192,7 +210,7 @@ namespace DotNet.NLogger.NetCore
                         string tmp = pattern.Replace("*", "");
                         if (categoryName.ToLower().Contains(tmp.ToLower()))
                         {
-                            return (MatchPatternResult.Contains, pattern,mapTo);
+                            return (MatchPatternResult.Contains, pattern, mapTo);
                         }
                     }
                     else if (pattern[0] == '*')

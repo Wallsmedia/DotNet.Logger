@@ -23,7 +23,11 @@ namespace DotNet.Memory.Logger
         IExternalScopeProvider _scopeProvider;
         MemoryLoggerSettings _settings;
 
+        /// <summary>
+        /// Logged messages buffer/queue 
+        /// </summary>
         public ConcurrentQueue<MemoryLogEntry> LogMessages { get; } = new ConcurrentQueue<MemoryLogEntry>();
+
         /// <summary>
         /// The logger category name.
         /// </summary>
@@ -204,6 +208,7 @@ namespace DotNet.Memory.Logger
         /// <param name="logName">The category log name.</param>
         /// <param name="eventId">Id of the event.</param>
         /// <param name="message">The log message.</param>
+        /// <param name="scope">The logging scope flag.</param>
         /// <param name="exception">The exception related to this entry.</param>
         public virtual void WriteMessage(LogLevel logLevel, string logName, EventId eventId, string message, string scope, Exception exception)
         {

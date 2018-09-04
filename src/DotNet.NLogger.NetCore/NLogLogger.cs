@@ -21,7 +21,14 @@ namespace DotNet.NLogger.NetCore
     public class NLogLogger : Microsoft.Extensions.Logging.ILogger
     {
 
+        /// <summary>
+        /// The logging category name.
+        /// </summary>
         public string CategoryName { get; }
+
+        /// <summary>
+        /// The base Nlog logger instance.
+        /// </summary>
         public Logger Logger { get; }
 
         /// <summary>

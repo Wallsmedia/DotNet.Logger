@@ -101,7 +101,6 @@ namespace DotNet.Memory.Logger.Test
         {
             LoggerFactory factory = new LoggerFactory();
             string category = String.Empty;
-            LogLevel logLevel = LogLevel.None;
             MemoryLoggerSettings memoryLoggerSettings = new MemoryLoggerSettings
             {
                 MemoryCacheSize = 10,
