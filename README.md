@@ -1,5 +1,8 @@
 # DotNet.NLogger.NetCore
 
+#### Version 2.2.0
+  - Support SDK v.2.2.0
+
 #### Version 2.1.2
  - Add support the feature turn on/off scope logging
  - Support SDK v.2.1.3
