@@ -1,4 +1,14 @@
+### Development Supported by JetBrains Open Source Program:
+
+**Rider** <a href="https://www.jetbrains.com/?from=XmlResult"> <img src="https://github.com/Wallsmedia/XmlResult/blob/master/Logo/rider/logo.png?raw=true" Width="40p" /></a> **Fast & powerful,
+cross platform .NET IDE**
+
+**ReSharper** <a href="https://www.jetbrains.com/?from=XmlResult"> <img src="https://github.com/Wallsmedia/XmlResult/blob/master/Logo/resharper/logo.png?raw=true" Width="40p" /></a> **The Visual Studio Extension for .NET Developers**
+
 # DotNet.NLogger.NetCore
+
+#### Version 3.1.0
+  - Support SDK v.3.1.101-*
 
 #### Version 2.2.0
   - Support SDK v.2.2.0
@@ -176,6 +186,9 @@ So, It is recommend to read "how to configure the Logging'" section from ASP.NET
 
 # DotNet.Memory.Logger
 .NET Memory Logger is a simple extension to log into memory by using [ConcurrentQueue\<T\>](https://docs.microsoft.com/en-gb/dotnet/api/system.collections.concurrent.concurrentqueue-1) collections
+
+#### Version 3.1.0
+  - Support SDK v.3.1.101-*
 
 #### Version 2.1.2
  - Add support the feature turn on/off scope logging
