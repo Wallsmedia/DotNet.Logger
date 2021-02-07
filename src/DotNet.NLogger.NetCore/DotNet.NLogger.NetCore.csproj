@@ -1,40 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
     <AssemblyName>DotNet.NLogger.NetCore</AssemblyName>
     <RootNamespace>DotNet.NLogger.NetCore</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>3.1.0</Version>
-    <FileVersion>3.1.0</FileVersion>
-    <AssemblyVersion>3.1.0</AssemblyVersion>
-
     <PackageId>DotNet.NLog.NetCore</PackageId>
     <Description>Dot Net NLog  logger wrapper for Microsoft.Extensions.Logging.</Description>
-    
-    <Authors>Wallsmedia Ltd</Authors>
-    <Copyright>Copyright $([System.DateTime]::Now.ToString('yyyy')) © Artem &amp; Alex Paskhin 2018. All rights reserved.</Copyright>
-    
+
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Wallsmedia/DotNet.Logger.git</RepositoryUrl>
-    
+
     <OutputType>Library</OutputType>
     <PackageTags>NLog  Log Logger</PackageTags>
-    <PackageReleaseNotes>Singed assembly; version for netstandard2.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Singed assembly; </PackageReleaseNotes>
   </PropertyGroup>
- 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.1" />
-    <PackageReference Include="NLog" Version="4.6.8" />
+
+  <ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' >= '3.0'">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
   </ItemGroup>
- 
+
   <ItemGroup>
+    <PackageReference Include="NLog" Version="4.7.7" />
     <None Include="..\..\LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

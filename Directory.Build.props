@@ -1,7 +1,22 @@
 ﻿<Project>
-
+  <Import Project="version.props"/>
+  
   <PropertyGroup>
     <Product>Dot NET Core "Microsoft.Extensions.Logging" Logger Extensions</Product>
+
+    <Authors>Wallsmedia Ltd</Authors>
+    <Copyright>Copyright $([System.DateTime]::Now.ToString('yyyy')) © Artem &amp; Alex Paskhin 2018-2021. All rights reserved.</Copyright>
+
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Wallsmedia/DotNet.Logger.git</RepositoryUrl>
+
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <DotNetCoreAppVersion>net5.0</DotNetCoreAppVersion>
+    <DotNetCoreVersion>netstandard2.1</DotNetCoreVersion>
   </PropertyGroup>
   
 </Project>
