@@ -1,44 +1,46 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>DotNet.Memory.Logger</AssemblyName>
-    <RootNamespace>DotNet.Memory</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyName>DotNet.Memory.Logger</AssemblyName>
+		<RootNamespace>DotNet.Memory</RootNamespace>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
-   
-    <PackageId>DotNet.Memory.Logger</PackageId>
-    <Description>Dot Net Memory logger for Microsoft.Extensions.Logging.</Description>
-    <OutputType>Library</OutputType>
-    <PackageTags>Memory Logger Logging Log</PackageTags>
-    <PackageReleaseNotes>Singed assembly; version for netstandard2.0</PackageReleaseNotes>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
 
-  <ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' >= '3.0'">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
-  </ItemGroup>
+		<PackageId>DotNet.Memory.Logger</PackageId>
+		<Description>Dot Net Memory logger for Microsoft.Extensions.Logging.</Description>
+		<OutputType>Library</OutputType>
+		<PackageTags>Memory Logger Logging Log</PackageTags>
+		<PackageReleaseNotes>Singed assembly; version for netstandard2.0</PackageReleaseNotes>
+	</PropertyGroup>
 
+	<ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' &gt;= '3.0'">
+		<FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
+	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\LICENSE.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<PropertyGroup>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="$(Configuration) == 'Release'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageOutputPath>../../.nupkgs</PackageOutputPath>
-  </PropertyGroup>
+	<PropertyGroup Condition="$(Configuration) == 'Release'">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>../../.nupkgs</PackageOutputPath>
+	</PropertyGroup>
 
 </Project>

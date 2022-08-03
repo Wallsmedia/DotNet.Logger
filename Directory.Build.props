@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <DotNetCoreAppVersion>net5.0</DotNetCoreAppVersion>
+    <DotNetCoreAppVersion>net6.0</DotNetCoreAppVersion>
     <DotNetCoreVersion>netstandard2.1</DotNetCoreVersion>
   </PropertyGroup>
   

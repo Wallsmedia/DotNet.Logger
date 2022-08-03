@@ -1,47 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
-    <AssemblyName>DotNet.NLogger.NetCore</AssemblyName>
-    <RootNamespace>DotNet.NLogger.NetCore</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
+		<AssemblyName>DotNet.NLogger.NetCore</AssemblyName>
+		<RootNamespace>DotNet.NLogger.NetCore</RootNamespace>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <PackageId>DotNet.NLog.NetCore</PackageId>
-    <Description>Dot Net NLog  logger wrapper for Microsoft.Extensions.Logging.</Description>
+	<PropertyGroup>
+		<PackageId>DotNet.NLog.NetCore</PackageId>
+		<Description>Dot Net NLog  logger wrapper for Microsoft.Extensions.Logging.</Description>
 
-    <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Wallsmedia/DotNet.Logger.git</RepositoryUrl>
+		<PackageLicenseUrl></PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/Wallsmedia/DotNet.Logger.git</RepositoryUrl>
 
-    <OutputType>Library</OutputType>
-    <PackageTags>NLog  Log Logger</PackageTags>
-    <PackageReleaseNotes>Singed assembly; </PackageReleaseNotes>
-  </PropertyGroup>
+		<OutputType>Library</OutputType>
+		<PackageTags>NLog  Log Logger</PackageTags>
+		<PackageReleaseNotes>Singed assembly; </PackageReleaseNotes>
+	</PropertyGroup>
 
-  <ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' >= '3.0'">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' &gt;= '3.0'">
+		<FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="NLog" Version="4.7.7" />
-    <None Include="..\..\LICENSE.txt">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="NLog" Version="5.0.1" />
+		<None Include="..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>../../build/Key.snk</AssemblyOriginatorKeyFile>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="$(Configuration) == 'Release'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageOutputPath>../../.nupkgs</PackageOutputPath>
-  </PropertyGroup>
+	<PropertyGroup Condition="$(Configuration) == 'Release'">
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageOutputPath>../../.nupkgs</PackageOutputPath>
+	</PropertyGroup>
 
 </Project>

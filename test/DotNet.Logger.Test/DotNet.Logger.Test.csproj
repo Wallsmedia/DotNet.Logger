@@ -1,23 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+		<PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
+		<PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' >= '3.0'">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' &gt;= '3.0'">
+		<FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\DotNet.Memory.Logger\DotNet.Memory.Logger.csproj" />
-    <ProjectReference Include="..\..\src\DotNet.NLogger.NetCore\DotNet.NLogger.NetCore.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\DotNet.Memory.Logger\DotNet.Memory.Logger.csproj" />
+		<ProjectReference Include="..\..\src\DotNet.NLogger.NetCore\DotNet.NLogger.NetCore.csproj" />
+	</ItemGroup>
 
 </Project>
