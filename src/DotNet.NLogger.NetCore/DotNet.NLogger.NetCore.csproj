@@ -25,9 +25,9 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" '$(TargetFramework)' == '$(DotNetFrameworkVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion20)'">
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

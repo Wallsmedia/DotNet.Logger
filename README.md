@@ -1,5 +1,10 @@
 # DotNet.NLogger.NetCore
 
+#### Version 7.0.0
+Supports: 
+- .Net 7.x,
+- netstandard 2.0, netstandard 2.1, Net 4.8 with ref to Microsoft.Extensions.xxxx 7.0.0
+
 #### Version 6.1.0
 Supports: 
 - .Net 6.x,
@@ -191,11 +196,16 @@ So, It is recommend to read "how to configure the Logging'" section from ASP.NET
 # DotNet.Memory.Logger
 .NET Memory Logger is a simple extension to log into memory by using [ConcurrentQueue\<T\>](https://docs.microsoft.com/en-gb/dotnet/api/system.collections.concurrent.concurrentqueue-1) collections
 
+#### Version 7.0.0
+Supports: 
+- .Net 7.x,
+- netstandard 2.0, netstandard 2.1, Net 4.8 with ref to Microsoft.Extensions.xxxx 7.0.0
+
 #### Version 6.1.0
 Supports: 
 - .Net 6.x,
 - netstandard 2.0, netstandard 2.1, Net 4.8 with ref to Microsoft.Extensions.xxxx 6.0.0
-- 
+ 
 #### Version 6.0.0
 - Add support of .Net 6.x and netstandard 2.1
 
