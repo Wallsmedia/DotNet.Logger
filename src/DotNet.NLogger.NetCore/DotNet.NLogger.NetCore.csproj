@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
+		<TargetFrameworks>$(DotNetCoreAppVersion);$(DotNetFrameworkVersion);$(DotNetCoreVersion);$(DotNetCoreVersion20)</TargetFrameworks>
 		<AssemblyName>DotNet.NLogger.NetCore</AssemblyName>
 		<RootNamespace>DotNet.NLogger.NetCore</RootNamespace>
 	</PropertyGroup>
@@ -17,11 +17,17 @@
 
 		<OutputType>Library</OutputType>
 		<PackageTags>NLog  Log Logger</PackageTags>
-		<PackageReleaseNotes>Singed assembly; </PackageReleaseNotes>
+		<PackageReleaseNotes>net6.0 ; net48 + netstandard2.x + MicroSoft.Extentions 6.0.x</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' &gt;= '3.0'">
 		<FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
+	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == '$(DotNetFrameworkVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion20)'">
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

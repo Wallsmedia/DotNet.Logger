@@ -6,18 +6,24 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
-
+		<TargetFrameworks>$(DotNetCoreAppVersion);$(DotNetFrameworkVersion);$(DotNetCoreVersion);$(DotNetCoreVersion20)</TargetFrameworks>
 		<PackageId>DotNet.Memory.Logger</PackageId>
 		<Description>Dot Net Memory logger for Microsoft.Extensions.Logging.</Description>
 		<OutputType>Library</OutputType>
 		<PackageTags>Memory Logger Logging Log</PackageTags>
-		<PackageReleaseNotes>Singed assembly; version for netstandard2.0</PackageReleaseNotes>
+		<PackageReleaseNotes>net6.0 ; net48 + netstandard2.x + MicroSoft.Extentions 6.0.x</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' &gt;= '3.0'">
 		<FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
 	</ItemGroup>
+
+	<ItemGroup Condition=" '$(TargetFramework)' == '$(DotNetFrameworkVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion20)'">
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+	</ItemGroup>
+
 
 	<ItemGroup>
 		<None Include="..\..\LICENSE.txt">
