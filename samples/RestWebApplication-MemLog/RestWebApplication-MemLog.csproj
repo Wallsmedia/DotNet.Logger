@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
+		<TargetFrameworks>$(DotNetCoreAppVersion)</TargetFrameworks>
 		<Product>Sample for NLog Logger Provider for Microsoft.Extensions.Logging.</Product>
 	</PropertyGroup>
 

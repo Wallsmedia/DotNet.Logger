@@ -1,24 +1,24 @@
 ﻿<Project>
-  <Import Project="version.props"/>
   
   <PropertyGroup>
+
+    <Version>8.0.1</Version>
+    <FileVersion>8.0.1</FileVersion>
+    <AssemblyVersion>8.0.0</AssemblyVersion>
+  
     <Product>Dot NET Core "Microsoft.Extensions.Logging" Logger Extensions</Product>
 
     <Authors>Wallsmedia Ltd</Authors>
     <Copyright>Copyright $([System.DateTime]::Now.ToString('yyyy')) © Artem &amp; Alex Paskhin 2018-2021. All rights reserved.</Copyright>
-
-    <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Wallsmedia/DotNet.Logger.git</RepositoryUrl>
-
   </PropertyGroup>
 
   <PropertyGroup>
 	  <DotNetCoreAppVersion>net8.0</DotNetCoreAppVersion>
 	  <DotNetFrameworkVersion>net48</DotNetFrameworkVersion>
 	  <DotNetCoreVersion20>netstandard2.0</DotNetCoreVersion20>
-    <DotNetCoreVersion>netstandard2.1</DotNetCoreVersion>
   </PropertyGroup>
   
 </Project>

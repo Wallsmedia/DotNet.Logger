@@ -3,7 +3,7 @@
 #### Version 8.0.0
 Supports: 
 - .Net 8.x,
-- netstandard 2.0, netstandard 2.1, Net 4.8 with ref to Microsoft.Extensions.xxxx 8.0.0
+- netstandard 2.0; Net 4.8 with ref to Microsoft.Extensions.xxxx 8.0.0
 - 
 #### Version 7.0.0
 Supports: 

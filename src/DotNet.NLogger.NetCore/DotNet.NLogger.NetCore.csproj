@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>$(DotNetCoreAppVersion);$(DotNetFrameworkVersion);$(DotNetCoreVersion);$(DotNetCoreVersion20)</TargetFrameworks>
+		<TargetFrameworks>$(DotNetCoreAppVersion);$(DotNetFrameworkVersion);$(DotNetCoreVersion20)</TargetFrameworks>
 		<AssemblyName>DotNet.NLogger.NetCore</AssemblyName>
 		<RootNamespace>DotNet.NLogger.NetCore</RootNamespace>
 	</PropertyGroup>
@@ -9,29 +9,27 @@
 	<PropertyGroup>
 		<PackageId>DotNet.NLog.NetCore</PackageId>
 		<Description>Dot Net NLog  logger wrapper for Microsoft.Extensions.Logging.</Description>
-
-		<PackageLicenseUrl></PackageLicenseUrl>
 		<PackageProjectUrl>https://github.com/Wallsmedia/DotNet.Logger</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/Wallsmedia/DotNet.Logger.git</RepositoryUrl>
-
 		<OutputType>Library</OutputType>
 		<PackageTags>NLog  Log Logger</PackageTags>
-		<PackageReleaseNotes>net6.0 ; net48 + netstandard2.x + MicroSoft.Extentions 6.0.x</PackageReleaseNotes>
+		<PackageReleaseNotes>net8.0 ; net48; netstandard2.0  MicroSoft.Extentions > 8.0.x</PackageReleaseNotes>
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(DisableImplicitFrameworkReferences)' != 'true' And '$(TargetFrameworkIdentifier)' == '.NETCoreApp' And '$(_TargetFrameworkVersionWithoutV)' &gt;= '3.0'">
 		<FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == '$(DotNetFrameworkVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion20)'">
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net48' Or '$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="[8.0,)" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="[8.0,)" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="[8.0,)"  />
 	</ItemGroup>
 
+
 	<ItemGroup>
-		<PackageReference Include="NLog" Version="5.3.2" />
+		<PackageReference Include="NLog" Version="[5.3,)" />
 		<None Include="..\..\LICENSE.txt">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>

@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>$(DotNetCoreAppVersion);$(DotNetFrameworkVersion);$(DotNetCoreVersion);$(DotNetCoreVersion20)</TargetFrameworks>
+		<TargetFrameworks>$(DotNetCoreAppVersion);$(DotNetFrameworkVersion);$(DotNetCoreVersion20)</TargetFrameworks>
 		<PackageId>DotNet.Memory.Logger</PackageId>
 		<Description>Dot Net Memory logger for Microsoft.Extensions.Logging.</Description>
 		<OutputType>Library</OutputType>
@@ -18,10 +18,10 @@
 		<FrameworkReference Include="Microsoft.AspNetCore.App" IsImplicitlyDefined="true" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == '$(DotNetFrameworkVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion)' Or '$(TargetFramework)' == '$(DotNetCoreVersion20)'">
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net48' Or '$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="[8.0,)" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="[8.0,)" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="[8.0,)" />
 	</ItemGroup>
 
 

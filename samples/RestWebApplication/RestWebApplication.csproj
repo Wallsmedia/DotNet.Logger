@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
+		<TargetFrameworks>$(DotNetCoreAppVersion)</TargetFrameworks>
 		<Product>Sample for NLog Logger Provider for Microsoft.Extensions.Logging.</Product>
 	</PropertyGroup>
 
@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\DotNet.Memory.Logger\DotNet.Memory.Logger.csproj" />
+		<ProjectReference Include="..\..\src\DotNet.Memory.Logger\DotNet.Memory.Logger.csproj"   />
 		<ProjectReference Include="..\..\src\DotNet.NLogger.NetCore\DotNet.NLogger.NetCore.csproj" />
 	</ItemGroup>
 

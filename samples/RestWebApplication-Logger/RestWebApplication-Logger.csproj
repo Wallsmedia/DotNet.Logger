@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>$(DotNetCoreAppVersion)</TargetFramework>
+		<TargetFrameworks>$(DotNetCoreAppVersion)</TargetFrameworks>
 		<Product>Sample for NLog Logger Provider for Microsoft.Extensions.Logging.</Product>
 	</PropertyGroup>
 
@@ -11,10 +11,6 @@
 		<Content Remove="wwwroot\**" />
 		<EmbeddedResource Remove="wwwroot\**" />
 		<None Remove="wwwroot\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>
